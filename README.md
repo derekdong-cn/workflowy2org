@@ -18,3 +18,8 @@ org-mode in Emacs has many advantages over Workflowy:
 * You can back up your .org files or sync them to other devices automatically. Workflowy lists have to be backed up manually.
 * org-mode leverages Emacs functionality and keybindings, allowing you to take notes and update the hierarchy structure quickly and intuitively if you know Emacs.
 * org-mode is much more flexible, configurable, and has more features.
+
+## Limitations
+
+* Does not (yet) convert workflowy-style tags (#example) to org-style tags (:example:).
+* The method described in the [Usage section](#Usage) does not preserve formatting (bold, italics, etc.).
