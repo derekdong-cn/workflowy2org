@@ -1,28 +1,10 @@
-# Return string `s` duplicated `i` times.
-def duplicate(s, i):
-    ret = ""
-    for j in xrange(i):
-        ret += s
-    return ret
+import workflowy2org
+from workflowy2org.converter import Converter
 
 in_name = raw_input("What file are we converting? (full name) ")
-outfile = open(in_name + ".org", 'w')
-wfDone = "[COMPLETE]"
-orgDone = "DONE"
+out_name = in_name + ".org"
 
-for num, line in enumerate(open(in_name)):
-    if line.isspace():
-        break
-    dash = line.find("-")
-    if dash == -1:
-        print("Error at line " + str(num))
-        break
-
-    line = line[dash + 1:].strip() # get line contents only
-    if line.startswith(wfDone):
-        line = line.replace(wfDone, orgDone, 1) # replace a single occurrence
-    line = duplicate("*", dash // 2 + 1) + " " + line # build the new line
-    
-    outfile.write(line + "\n")
-
-outfile.close()
+c = Converter()
+with open(in_name) as instream:
+    with open(out_name, 'w') as outstream:
+        c.convert(instream, outstream)
