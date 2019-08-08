@@ -8,9 +8,9 @@ class Converter:
 
             # Bullets start with dash ("-"), perhaps with leading spaces.
             # "Text lines" (bullet sub-elements) should never start with a dash
-            # charater ... note this will fail if the text line does in fact start
+            # character ... note this will fail if the text line does in fact start
             # with a dash, but that shouldn't occur often.  Solving that
-            # Correctly would require a parser, which seems
+            # correctly would require a parser, which seems
             # like needless complication.
             is_text_line = (line.strip().find("-") != 0)
             if is_text_line:
