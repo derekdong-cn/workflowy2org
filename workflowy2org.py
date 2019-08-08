@@ -1,28 +1,15 @@
-# Return string `s` duplicated `i` times.
-def duplicate(s, i):
-    ret = ""
-    for j in xrange(i):
-        ret += s
-    return ret
+"""
+Command-line script: converts a Workflowy text export to org-mode format.
+"""
 
-in_name = raw_input("What file are we converting? (full name) ")
-outfile = open(in_name + ".org", 'w')
-wfDone = "[COMPLETE]"
-orgDone = "DONE"
+import workflowy2org
+from workflowy2org.converter import Converter
 
-for num, line in enumerate(open(in_name)):
-    if line.isspace():
-        break
-    dash = line.find("-")
-    if dash == -1:
-        print("Error at line " + str(num))
-        break
+IN_NAME = raw_input("What file are we converting? (full name) ")
+OUT_NAME = IN_NAME + ".org"
 
-    line = line[dash + 1:].strip() # get line contents only
-    if line.startswith(wfDone):
-        line = line.replace(wfDone, orgDone, 1) # replace a single occurrence
-    line = duplicate("*", dash // 2 + 1) + " " + line # build the new line
-    
-    outfile.write(line + "\n")
-
-outfile.close()
+C = Converter()
+with open(IN_NAME) as instream:
+    with open(OUT_NAME, 'w') as outstream:
+        C.convert(instream, outstream)
+C.print_warnings()

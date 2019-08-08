@@ -4,7 +4,17 @@ A script for converting Workflowy lists to .org files so they can be used in Ema
 
 ## Usage
 
-Download your Workflowy list by going to "Export All" and choosing "Plain text". Run `python workflowy2org.py`.
+* Download your Workflowy list by going to "Export All" and choosing "Plain text".
+* Run `python workflowy2org.py`.
+* If you see warnings during the export, check the generated org-mode file, and potentially fix and re-export your Workflowy
+
+## Development and testing
+
+Run unit tests as follows:
+
+```
+$ python -m unittest discover
+```
 
 ## Why?
 
@@ -23,3 +33,4 @@ org-mode in Emacs has many advantages over Workflowy:
 
 * Does not (yet) convert workflowy-style tags (#example) to org-style tags (:example:).
 * The method described in the [Usage section](#Usage) does not preserve formatting (bold, italics, etc.).
+* Cannot correctly parse bullet notes (created in Workflowy with Shift-Enter) that contain lines starting with asterisks and dashes.  Please remove these before exporting from Workflowy.
