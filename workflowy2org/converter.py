@@ -1,8 +1,6 @@
 class Converter:
     
     def convert(self, input_stream, output_stream):
-        wfDone = "[COMPLETE]"
-        orgDone = "DONE"
 
         num = 0
         for line in input_stream:
@@ -20,8 +18,11 @@ class Converter:
                 continue
 
             dash = line.find("-")
+
+            line_text = line[dash + 1:].strip()
+            wfDone = "[COMPLETE]"
+            if line_text.startswith(wfDone):
+                line_text = line_text.replace(wfDone, "DONE", 1) # replace a single occurrence
+
             bullet = '*' * (dash // 2 + 1)
-            line = line[dash + 1:].strip() # get line contents only
-            if line.startswith(wfDone):
-                line = line.replace(wfDone, orgDone, 1) # replace a single occurrence
-            output_stream.write(bullet + " " + line + "\n")
+            output_stream.write(bullet + " " + line_text + "\n")
