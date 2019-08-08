@@ -11,9 +11,11 @@ class Converter:
         wfDone = "[COMPLETE]"
         orgDone = "DONE"
 
-        for num, line in enumerate(input_stream):
+        num = 0
+        for line in input_stream:
+            num += 1
             if line.isspace():
-                break
+                continue
             dash = line.find("-")
             if dash == -1:
                 print("Error at line " + str(num))
@@ -23,5 +25,5 @@ class Converter:
             if line.startswith(wfDone):
                 line = line.replace(wfDone, orgDone, 1) # replace a single occurrence
             line = self.duplicate("*", dash // 2 + 1) + " " + line # build the new line
-        
+
             output_stream.write(line + "\n")

@@ -6,6 +6,14 @@ A script for converting Workflowy lists to .org files so they can be used in Ema
 
 Download your Workflowy list by going to "Export All" and choosing "Plain text". Run `python workflowy2org.py`.
 
+## Development and testing
+
+Run unit tests as follows:
+
+```
+$ python -m unittest discover
+```
+
 ## Why?
 
 This was created for my personal need, but I hope it will be useful for others as well.
