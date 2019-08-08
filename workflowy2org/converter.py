@@ -18,8 +18,7 @@ class Converter:
                 continue
             dash = line.find("-")
             if dash == -1:
-                print("Error at line " + str(num))
-                break
+                raise Exception("Error at line " + str(num))
 
             line = line[dash + 1:].strip() # get line contents only
             if line.startswith(wfDone):
