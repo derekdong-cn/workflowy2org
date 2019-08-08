@@ -14,11 +14,21 @@ class Converter:
         num = 0
         for line in input_stream:
             num += 1
+
+            # Bullets start with dash ("-"), perhaps with leading spaces.
+            # "Text lines" (bullet sub-elements) should never start with a dash
+            # charater ... note this will fail if the text line does in fact start
+            # with a dash, but that shouldn't occur often.  Solving that
+            # Correctly would require a parser, which seems
+            # like needless complication.
+            is_text_line = (line.strip().find("-") != 0)
+            if is_text_line:
+                output_stream.write(line.strip().replace('"', '') + "\n")
+                continue
+
             if line.isspace():
                 continue
             dash = line.find("-")
-            if dash == -1:
-                raise Exception("Error at line " + str(num))
 
             line = line[dash + 1:].strip() # get line contents only
             if line.startswith(wfDone):

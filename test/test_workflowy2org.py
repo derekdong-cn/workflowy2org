@@ -23,8 +23,7 @@ class ImportTests(unittest.TestCase):
 
 
     def test_multiple_lines(self):
-        input_text = u"""
-- To Do
+        input_text = u"""- To Do
   - [COMPLETE] Rent a truck
     - [COMPLETE] call them
   - Run every day
@@ -51,6 +50,39 @@ class ImportTests(unittest.TestCase):
         self.convert_and_check(input_text, expected_output)
 
 
+    def test_bullets_can_contain_text(self):
+        """Workflowy bullets can contain text as a subelement"""
+        input_text = u"""- Testing
+  - a
+  - b
+    "b's text"
+  - c
+    "c text,
+    with 2 lines"
+  - d
+    "d text, with blank line
+    
+    end of d text"
+  - e
+"""
+
+        expected_output = u"""* Testing
+** a
+** b
+b's text
+** c
+c text,
+with 2 lines
+** d
+d text, with blank line
+
+end of d text
+** e
+"""
+
+        self.convert_and_check(input_text, expected_output)
+
+        
 def main():
     unittest.main()
 
