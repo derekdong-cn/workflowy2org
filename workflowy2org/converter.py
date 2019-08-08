@@ -1,10 +1,23 @@
-class Converter:
-    
-    def convert(self, input_stream, output_stream):
+"""
+Conversion classes.
+"""
 
-        num = 0
+class Converter(object): # pylint: disable=too-few-public-methods
+    """
+    Converts Workflowy text export to org-mode.
+    """
+
+
+    def convert(self, input_stream, output_stream):
+        """
+        Converts Workflowy text export to org-mode.
+
+        Args:
+          input_stream: the Workflowy text export.
+          output_stream: where converted text is written to.
+        """
+
         for line in input_stream:
-            num += 1
 
             # Bullets start with dash ("-"), perhaps with leading spaces.
             # "Text lines" (bullet sub-elements) should never start with a dash
@@ -20,9 +33,9 @@ class Converter:
             dash = line.find("-")
 
             line_text = line[dash + 1:].strip()
-            wfDone = "[COMPLETE]"
-            if line_text.startswith(wfDone):
-                line_text = line_text.replace(wfDone, "DONE", 1) # replace a single occurrence
+            wf_complete = "[COMPLETE]"
+            if line_text.startswith(wf_complete):
+                line_text = line_text.replace(wf_complete, "DONE", 1) # replace a single occurrence
 
             bullet = '*' * (dash // 2 + 1)
             output_stream.write(bullet + " " + line_text + "\n")

@@ -1,7 +1,15 @@
+"""
+Unit tests.
+
+The test names document the use case tested.
+"""
+# pylint: disable=missing-docstring
+
+
 import unittest
 from io import StringIO
 
-import workflowy2org
+import workflowy2org  # pylint: disable=unused-import
 from workflowy2org.converter import Converter
 
 class ImportTests(unittest.TestCase):
@@ -13,8 +21,8 @@ class ImportTests(unittest.TestCase):
         infile = StringIO(input_text)
         outfile = StringIO()
 
-        c = Converter()
-        c.convert(infile, outfile)
+        converter = Converter()
+        converter.convert(infile, outfile)
         self.assertEqual(expected_output_text, outfile.getvalue())
 
 
@@ -82,7 +90,7 @@ end of d text
 
         self.convert_and_check(input_text, expected_output)
 
-        
+
 def main():
     unittest.main()
 
