@@ -13,3 +13,5 @@ with open(IN_NAME) as instream:
     with open(OUT_NAME, 'w') as outstream:
         C.convert(instream, outstream)
 C.print_warnings()
+print
+print "File converted! Output at", OUT_NAME
