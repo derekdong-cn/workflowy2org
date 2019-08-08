@@ -2,10 +2,16 @@
 Conversion classes.
 """
 
-class Converter(object): # pylint: disable=too-few-public-methods
+class Converter(object):
     """
     Converts Workflowy text export to org-mode.
     """
+
+    def __init__(self):
+        """
+        Constructor
+        """
+        self._has_notes = False
 
 
     def convert(self, input_stream, output_stream):
@@ -17,6 +23,8 @@ class Converter(object): # pylint: disable=too-few-public-methods
           output_stream: where converted text is written to.
         """
 
+        self._has_notes = False
+
         for line in input_stream:
 
             # Bullets start with dash ("-"), perhaps with leading spaces.
@@ -27,6 +35,7 @@ class Converter(object): # pylint: disable=too-few-public-methods
             # like needless complication.
             is_text_line = (line.strip().find("-") != 0)
             if is_text_line:
+                self._has_notes = True
                 output_stream.write(line.strip().replace('"', '') + "\n")
                 continue
 
@@ -39,3 +48,20 @@ class Converter(object): # pylint: disable=too-few-public-methods
 
             bullet = '*' * (dash // 2 + 1)
             output_stream.write(bullet + " " + line_text + "\n")
+
+
+    def print_warnings(self):
+        """
+        Print warnings to console.  Do nothing if no warnings.
+        """
+
+        if self._has_notes:
+            warning = """WARNING: bullets with notes may not be exported correctly.
+
+Workflowy allows you to add notes to bullets (with Shift-Enter).
+These notes may contain lines that start with asterisks or dashes,
+which currently confuse this exporter, and result in notes being converted
+to bullets.  Please check the generated file, and if necessary update the
+Workflowy bullet notes to remove these asterisks or dashes, and re-export.
+"""
+            print warning
