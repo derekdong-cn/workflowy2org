@@ -26,8 +26,6 @@ class Converter:
                 output_stream.write(line.strip().replace('"', '') + "\n")
                 continue
 
-            if line.isspace():
-                continue
             dash = line.find("-")
 
             line = line[dash + 1:].strip() # get line contents only
