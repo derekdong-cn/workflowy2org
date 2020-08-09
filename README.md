@@ -1,6 +1,6 @@
 # Workflowy 2 Org-Mode
 
-A script for converting Workflowy lists to .org files so they can be used in Emacs org-mode. Requires Python 2.
+A script for converting Workflowy lists to .org files so they can be used in Emacs org-mode. Requires Python 3.
 
 ## Usage
 
