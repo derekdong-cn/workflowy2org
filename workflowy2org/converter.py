@@ -64,4 +64,4 @@ which currently confuse this exporter, and result in notes being converted
 to bullets.  Please check the generated file, and if necessary update the
 Workflowy bullet notes to remove these asterisks or dashes, and re-export.
 """
-            print warning
+            print(warning)
